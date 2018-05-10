@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.red {
+			color: red;
+		}
+
+		.fontSize {
+			font-size: 50px;
+		}
+	</style>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<span class="fontSize" v-bind:class='{red:addClass}'>hello,miaov</span>
+		<ul>
+			<li v-for="todo in todos" v-if="todo.isComplete">{{ todo.title }}</li>
+		</ul>
+	</div>
+
+	<script>
+		//声明式渲染
+		var app = new Vue({
+			el: '#app',
+			data: {
+				addClass: false,
+				todos: [{
+						title: 1,
+						isComplete: true
+					},
+					{
+						title: 2,
+						isComplete: false
+					},
+					{
+						title: 3,
+						isComplete: false
+					},
+					{
+						title: 4,
+						isComplete: false
+					},
+				]
+			}
+
+
+
+		})
+		//根节点只有一个，指的是模板的外层只能有一个元素，不能并列多个
+	</script>
+</body>
+
+</html>

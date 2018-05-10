@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta content="IE=dege,chrom=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <title>Cart</title>
+    <link href="CSS/base.css" rel="stylesheet">
+    <link href="CSS/checkout.css" rel="stylesheet">
+    <link href="CSS/modal.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="container">
+		<div id="address">
+			<h1 class="main-title">
+            	<em>配送地址</em>
+        	</h1>
+        	<ul class="address-lists-wrapper">
+        		<li class="address-list" v-for="item in filterAddress">
+                    <div class="con">
+            			<p class="name">{{item.userName}}</p>
+                        <p class="streetName">{{item.streetName}}</p>
+                        <p class="tel">{{item.tel}}</p>
+                        <p class="isDefault" v-if="item.isDefault">设为默认</p>
+                    </div>
+                    <div class="edit-wrapper">
+                        <i class="iconfont icon-bianji"></i>
+                         <i class="iconfont icon-shanchu del"></i>
+                    </div>
+        		</li>
+                <li class="address-list add-new-address">
+                    <i class="iconfont icon-jiahao1"></i>
+                    <div>添加新地址</div>
+                </li>
+        	</ul>
+            <div class="shipping-addr-more">
+              <a class="addr-more-btn up-down-btn" href="javascript:" @click="limitNum=addressList.length">
+                more
+                <i class="i-up-down">
+                  <i class="i-up-down-l"></i>
+                  <i class="i-up-down-r"></i>
+                </i>
+              </a>
+            </div>
+		</div>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.3.1/vue-resource.min.js"></script>
+    <script src="js/address.js"></script>
+</body>
+</html>
+

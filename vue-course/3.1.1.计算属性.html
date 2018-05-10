@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li @click="handler(i)" v-for="abc,i in limtlist">{{abc}}</li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+
+        /* 
+            将处理数据的逻辑放在计算属性中完成，从而避免了在模板中处理逻辑，导致模板臃肿，不易阅读，不易维护
+
+            计算属性依赖data数据，当data改变会重新计算
+
+            计算的结果会被缓存
+
+            计算属性会挂载所在的实例上
+
+            使用： 
+                computed: {
+                    test() {
+                        return '计算后的只'
+                    }
+                }
+        
+         */
+
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                list: [1,2,3,4,5,6,7,8,9]
+            },
+            computed: {
+                limtlist() {
+                    let newList = this.list.filter(item => item < 7);
+
+                    return newList;//一定要有return，返回计算后的值
+                }
+            },
+            methods: {
+                handler(index) {
+                    alert(index);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div class="container">
+    <div id="app">
+        <h1 class="main-title">
+            <em>购物车</em>
+        </h1>
+
+        <div class="shopping-title">
+            <span class="list">商品信息</span>
+            <span class="list">商品金额</span>
+            <span class="list">商品数量</span>
+            <span class="list">总金额</span>
+            <span class="list">编辑</span>
+        </div>
+        <ul class="shoping-list">
+            <li class="list" v-for="(item,index) in productList" @click="">
+                <div class="item item-infor">
+                    <div class="item-infor-con">
+                        <i class="iconfont" :class="[item.checked ? 'icon-yuanxingxuanzhongfill' : 'icon-yuanxingweixuanzhong']" @click="selectedProduct(item)"></i>
+                        <img :src="item.productImage" alt="">
+                        <p class="des" v-text="item.productName"></p>
+                    </div>
+                    <div class="gift-wrap" v-for="part in item.parts">
+                        <span>赠品：</span><em v-text="part.partsName"></em>
+                    </div>
+                    
+                </div>
+                <div class="item item-price">{{item.productPrice | formatMoney}}</div>
+                <div class="item item-count">
+                    <div class="item-count-con">
+                        <span class="minus" @click="changeMoney(item,-1)">-</span>
+                        <input type="num" v-model.number="item.productQuantity">
+                        <span class="plus" @click="changeMoney(item,1)">+</span>
+                    </div>
+                    <p class="hasGoods">有货</p>
+                </div>
+                <div class="item item-total-price">{{item.productPrice*item.productQuantity | formatMoney}}</div>
+                <div class="item item-edit">
+                    <i class="iconfont icon-shanchu" @click="delConfirm(item)"></i>
+                </div>
+            </li>
+        </ul>
+        <div class="settlement-wrapper">
+            <div class="select-wrapper">
+                <div class="hasChecked" v-if="!checkAllFlag" @click="checkAll(true)">
+                    <i class="iconfont icon-yuanxingweixuanzhong"></i>全选
+                </div>
+                <div class="hasChecked" @click="checkAll(false)" v-else>
+                    <i class="iconfont icon-yuanxingxuanzhongfill"></i>取消选择
+                </div>
+            </div>
+            <div class="settlement">
+                <div class="total">Item total:<span>{{totalMoney | formatMoney}}</span></div>
+                <div class="btn">结账</div>
+            </div>
+        </div>
+        
+        <transition name="fade">
+            <div class="md-modal" v-if="delFlag" :class="{'md-show':delFlag}">
+                <div class="close" @click="delFlag = false">
+                    <i class="iconfont icon-guanbi1"></i>
+                </div>
+                <p class="tip">你确认删除此订单信息吗?</p>
+                <div class="btn-wrapper">
+                    <button class="btn"  @click="delFlag = false">No</button>
+                    <button class="btn active" @click="delProduct">YES</button>
+                </div>
+            </div>
+        </transition>
+        <transition name="fade">
+            <div class="md-overlay" v-if="delFlag"  @click="delFlag = false"></div>
+        </transition>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/vue.resource/1.3.1/vue-resource.min.js"></script>
+<script src="js/cart.js"></script>
+</body>
+</html>

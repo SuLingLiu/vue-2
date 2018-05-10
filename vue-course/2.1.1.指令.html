@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app" v-bind:cutomId="id">{{message}}</div>
+	
+	<script>
+		//声明式渲染
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue!!',
+				id: '123'
+			}
+		})
+		//<div id="app" v-bind:cutomId="id">{{message}}</div> --cutomId为自定义属性名
+	</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .tab {
+            width: 500px;
+            border: 1px solid #ccc;
+            margin: 50px auto;
+            font-size: 14px;
+        }
+        .tab-header {
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+        }
+        .tab-header .tab-item {
+            float: left;
+            width: 33.3333%;
+            border-right: 5px solid #ccc;
+            box-sizing: border-box;
+        }
+        .tab-header .tab-item:last-of-type {
+            border: none;
+        }
+        .tab-header .tab-active {
+            color: red;
+        }
+        .tab-content {
+            padding: 20px;
+        }
+        .tab-content .item-con {
+            display: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="tab" id="app">
+        <div class="tab-header">
+
+            <div v-for="item,index in tabData" class="tab-item" v-bind:class="{'tab-active': index === curIdx}" @click="handler(index)">{{item.title}}</div>
+        </div>
+        <div class="tab-content">
+            <div class="item-con" v-for="item,index in tabData" v-bind:style="{display:index === curIdx ? 'block' : ''}">
+                <p v-for="opt in item.list">{{opt.subTitle}}</p>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let tabData = [
+        {
+            title: '标签一',
+            list: [
+                {
+                    subTitle: 'css课程'
+                },
+                {
+                    subTitle: 'js'
+                }
+            ]
+        },
+        {
+            title: '标签二',
+            list: [
+                {
+                    subTitle: 'vue课程'
+                }
+            ]
+        },
+        {
+            title: '标签三',
+            list: [
+                {
+                    subTitle: 'node'
+                }
+            ]
+        }
+    ]
+
+    new Vue({
+        el: '#app',
+        data: {
+            tabData: tabData,
+            curIdx: 0
+        },
+        methods: {
+            handler(index) {
+                this.curIdx = index;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

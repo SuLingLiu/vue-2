@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<span>{{message}}</span>
+	</div>
+
+	<script>
+		//声明式渲染
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue!!',
+				abc: '1'
+			},
+			template: '<div class="test">你好{{abc}}</div>' //template的内容会完全覆盖<div id="app"></div>
+		})
+		//根节点只有一个，指的是模板的外层只能有一个元素，不能并列多个
+	</script>
+</body>
+
+</html>

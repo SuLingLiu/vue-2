@@ -1,0 +1,418 @@
+.container {
+	width: 1280px;
+	margin: 0 auto;
+	font-family: '微软雅黑';
+	padding: 80px 0;
+}
+.container .main-title {
+	height: 28px;
+	position: relative;
+}
+.container .main-title:before {
+	content: '';
+	display: block;
+	width: 100%;
+	padding-top: 14px;
+	border-bottom: 1px solid #ccc;
+}
+.container .main-title em {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	margin-left: -51px;
+	width: 102px;
+	height: 28px;
+	background: #fff;
+	font-size: 24px;
+	text-align: center;
+	color: #605f5f;
+	line-height: 28px;
+	font-style: normal;
+}
+
+.shopping-title {
+	display: flex;
+	height: 54px;
+	margin-top: 50px;
+	line-height: 54px;
+	font-size: 16px;
+	text-align: center;
+	color: #fff;
+	background: #605f5f;
+}
+.shopping-title .list {
+	width: 150px;
+}
+.shopping-title .list:first-of-type {
+	flex: 1;
+	width: 0;
+}
+.shoping-list {
+	border-left: 1px solid #e9e9e9;
+	border-right: 1px solid #e9e9e9;
+}
+.shoping-list .list {
+	display: flex;
+	text-align: center;
+	font-size: 14px;
+	align-items: center;
+	padding: 35px 0;
+	border-bottom: 1px solid #e9e9e9;
+}
+
+.shoping-list .list .item {
+	width: 150px;
+}
+.shoping-list .list .item-infor {
+	flex: 1;
+	width: 0;
+	text-align: left;
+}
+.shoping-list .list .item-infor .item-infor-con {
+	display: flex;
+	align-items: center;
+}
+.shoping-list .list .item-infor .iconfont {
+	font-size: 24px;
+	color: #d0d0d0;
+	margin: 0 18px;
+	color: red;
+	cursor: pointer;
+}
+
+.shoping-list .list .item-infor img {
+	border: 1px solid #ccc;
+	width: 80px;
+	height: 72px;
+	margin-right: 20px;
+	border-sizing: border-box;
+}
+.shoping-list .list .item-infor .des {
+
+	line-height: 20px;
+	min-height: 72px;
+	flex: 1;
+}
+.shoping-list .list .item-infor .gift-wrap {
+	padding-left: 160px;
+	line-height: 20px;
+	font-size: 12px;
+}
+.shoping-list .list .item-infor .gift-wrap span {
+	color: #333;
+	padding-right: 20px;
+}
+.shoping-list .list .item-infor .gift-wrap em {
+	color: #999;
+}
+.shoping-list .list .item-edit .iconfont {
+	font-size: 26px;
+	color: #b2b2b2;
+	cursor: pointer;
+}
+.shoping-list .list .item-count {
+	font-size: 0;
+	height: 40px;
+	line-height: 40px;
+}
+.shoping-list .list .item-count span {
+	display: inline-block;
+	width: 30px;
+	font-size: 20px;
+	text-align: center;
+	vertical-align: center;
+	cursor: pointer;
+}
+.shoping-list .list .item-count input {
+	display: inline-block;
+	width: 40px;
+	font-size: 20px;
+	height: 40px;
+	border-sizing: border-box;
+	text-align: center;
+}
+.shoping-list .list .item-count .hasGoods {
+	text-align: center;
+	color: #999;
+	font-size: 12px;
+	line-height: 20px;
+}
+.settlement-wrapper {
+	margin-top: 20px;
+	height: 56px;
+	
+}
+.settlement-wrapper .select-wrapper {
+	float: left;
+}
+.settlement-wrapper .select-wrapper .hasChecked {
+	font-size: 16px;
+	color: #ee7a23;
+	line-height: 56px;
+}
+.settlement-wrapper .select-wrapper .iconfont {
+	font-size: 24px;
+	color: #ccc;
+	margin: 0 18px;
+	vertical-align: top;
+	margin-top: -16px;
+	color: red;
+	cursor: pointer;
+}
+.settlement-wrapper .settlement {
+	float: right;
+	line-height: 56px;
+}
+.settlement-wrapper .settlement .total {
+	display: inline-block;
+	color: #605f5f;
+	font-size: 16px;
+}
+.settlement-wrapper .settlement .total span {
+	padding-left: 20px;
+	color: #d1434a;
+}
+.settlement-wrapper .settlement .btn {
+	display: inline-block;
+	width: 204px;
+	color: #fff;
+	background: #d1434a;
+	text-align: center;
+	font-size: 20px;
+	margin-left: 20px;
+}
+.md-modal {
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 535px;
+    height: auto;
+    box-sizing: border-box;
+    z-index: 201;
+    background: #fff;
+    padding: 60px 50px;
+    opacity: 1;
+    visibility: hidden;
+}
+.md-show {
+	visibility: visible;
+}
+.md-modal .tip {
+	font-size: 14px;
+    font-weight: 200;
+    text-align: center;
+    color: #333;
+    padding-bottom: 50px;
+}
+.md-modal .btn-wrapper {
+	display: flex;
+	padding: 0 40px;
+}
+.md-modal .btn-wrapper .btn {
+	flex: 1;
+	border: 1px solid #d1434a;
+	color: #d1434a;
+	text-align: center;
+	height: 42px;
+	line-height: 42px;
+	transition: all .3s ease-out;
+}
+.md-modal .btn-wrapper .btn:hover,.md-modal .btn-wrapper .btn.active {
+	background-color: #d1434a;
+    border: 1px #d1434a solid;
+    color: #fff; 
+}
+.md-modal .btn-wrapper .btn:first-of-type {
+	margin-right: 20px;
+}
+.md-modal .close {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+	transition: all .3s ease-out;
+}
+.md-modal .iconfont {
+	
+	font-size: 30px;
+	color: #605f5f;
+	
+}
+.md-modal .close:hover {
+	transform: rotate(180deg);
+}
+
+.md-overlay {
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+.address-lists-wrapper {
+  margin-top: 20px;
+  overflow: hidden;
+}
+.address-lists-wrapper .address-list {
+    position: relative;
+    float: left;
+    width: 23%;
+    height: 162px;
+    margin: 10px 2% 10px 0;
+    padding: 20px 20px 40px 20px;
+    background: #fff;
+    border: 2px solid #e9e9e9;
+    overflow: hidden;
+    cursor: pointer;
+}
+.address-lists-wrapper .address-list.check {
+    border-color: #EE7A23;
+    border-width: 2px; }
+.address-lists-wrapper .address-list .con {
+  width: 100%;
+  padding-right: 40px;
+  box-sizing: border-box;
+}
+.address-lists-wrapper .address-list .con p {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+.address-lists-wrapper .address-list .con .isDefault {
+  color: #EE7A23;
+  font-size: 14px;
+}
+.address-lists-wrapper .address-list .edit-wrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 40px;
+}
+.address-lists-wrapper .address-list .edit-wrapper .iconfont {
+  font-size: 26px;
+  display: block;
+  margin: 20px 0;
+}
+.address-lists-wrapper .add-new-address {
+
+  text-align: center;
+  font-size: 30px;
+}
+.address-lists-wrapper .add-new-address .iconfont {
+  font-size: 20px;
+  display: block;
+  margin: 20px 0;
+}
+.shipping-addr-more {
+  margin-top: 10px;
+  text-align: center; }
+  .up-down-btn {
+    color: #EE7A23;
+}
+
+.i-up-down {
+    position: relative;
+    display: inline-block;
+    width: 14px;
+    height: 6px;
+    vertical-align: middle;
+    z-index: 2;
+    -ms-transform: translateY(2px);
+    transform: translateY(2px);
+    transition: transform .3s ease-out;
+}
+
+.i-up-down i {
+    position: absolute;
+    top: 0;
+    width: 8px;
+    height: 1px;
+    background: #EE7A23;
+}
+
+.i-up-down .i-up-down-l {
+    left: 0;
+    -ms-transform: rotate(40deg);
+    transform: rotate(40deg);
+    transition: transform .3s ease-out;
+}
+
+.i-up-down .i-up-down-r {
+    right: 0;
+    -ms-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+    transition: all .3s ease-out;
+}
+.select-options {
+    display: none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    max-height: 210px;
+    background: #f0f0f0;
+    border-radius: 0 0 3px 3px;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.select-options li {
+    padding: .5em 15px;
+    border-top: 1px solid #e9e9e9;
+    text-align: left;
+}
+
+.select-options li:hover {
+    color: #EE7A23;
+}
+
+.select-self-open {
+    border-radius: 3px 3px 0 0;
+}
+
+.select-self-open .select-options {
+    display: block;
+}
+
+.select-self-open .i-up-down .i-up-down-l {
+    left: 0;
+    -ms-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+    transition: transform .3s ease-out;
+}
+
+.select-self-open .i-up-down .i-up-down-r {
+    right: 0;
+    -ms-transform: rotate(40deg);
+    transform: rotate(40deg);
+    transition: all .3s ease-out;
+}
+
+.select-self-open .select-options {
+    z-index: 102;
+}
+
+.select-self:hover, .up-down-btn:hover, .up-down-btn.open {
+    transition: all .3s ease-out;
+}
+
+.select-self:hover .i-up-down-l, .up-down-btn:hover .i-up-down-l, .up-down-btn.open .i-up-down-l {
+    -ms-transform: rotate(-40deg);
+    transform: rotate(-40deg);
+    transition: all .3s ease-out;
+}
+
+.select-self:hover .i-up-down-r, .up-down-btn:hover .i-up-down-r, .up-down-btn.open .i-up-down-r {
+    -ms-transform: rotate(40deg);
+    transform: rotate(40deg);
+    transition: all .3s ease-out;
+}

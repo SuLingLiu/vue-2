@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">{{message}}</div>
+	
+	<script>
+		//声明式渲染
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue!!'
+			}
+		})
+		
+		var arr = [1,2,3,4,5];
+
+		//命令式渲染,每一步需要考虑到
+		var newArr = [];
+		for(var i=0; i<arr.length; i++) {
+			newArr.push(arr[i]*2);
+		}
+
+		//声明式渲染
+		var newA = arr.map(function(item) {
+			return item * 2;//只需要关心这怎么写
+		})
+		console.log(newArr,newA)
+	</script>
+</body>
+</html>

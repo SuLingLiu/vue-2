@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<p>{{message.split('').reverse().join('')}}</p>
+		<div v-bind:id="'div_' + (id === 1 ? 1 : 2)">动态id</div>
+		<div v-html="htmls"></div>
+		<div v-once>{{noChange}}</div>
+		<button v-bind:disabled="isButtonDisabled">Button</button>
+	</div>
+
+	<script>
+		//声明式渲染
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello Vue!!', //插值，能进行简单的表达式操作
+				id: 2, //属性赋值
+				htmls: '<h2>我是标题<span></span></h2>', //插值会解析代码
+				noChange: '不能更改的值', //不能更改的插值，当数据改变时，插值处的内容不会更新
+				isButtonDisabled: true
+			}
+		})
+		console.log(app.$data.message, app.message) //获取数据
+	</script>
+</body>
+
+</html>

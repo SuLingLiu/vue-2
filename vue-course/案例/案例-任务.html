@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.task-count .action a {
+			text-decoration: none;
+			color: #000;
+			display: inline-block;
+			margin-right: 20px;
+			line-height: 30px;
+		}
+		.task-count .action a.active {
+			color: red;
+		}
+		.todo-list .todo {
+			line-height: 30px;
+			border-bottom: 1px #ccc solid;
+		}
+		.todo-list .todo .view {
+			display: inline-block;
+		}
+		.todo-list .todo .edit {
+			display: none;
+		}
+		.todo-list .editing .view {
+			display: none;
+		}
+		.todo-list .editing .edit {
+			display: block;
+		}
+		
+		.comp label {
+			color: #999;
+			text-decoration: line-through;
+		}
+	</style>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div class="main">
+		<h2 class="big-title">添加任务列表</h2>
+		<input type="text" class="task-input" placeholder="回车添加任务" v-model="todo" v-on:keyup.13="addTodo">
+		
+		<ul class="task-count" v-show="list.length">
+			<li>{{noCheckedLen}}
+			<!-- {{ 
+				list.filter(function(item) {
+					return !item.isChecked
+				}).length
+			}} -->
+			个任务未完成</li>
+			<li class="action">
+				<a href="#all" class="active">所有任务</a>
+				<a href="#unfinished" class="">未完成的任务</a>
+				<a href="#finished" class="">完成的任务</a>
+			</li>
+		</ul>
+
+		<h3 class="big-title">任务列表：</h3>
+		<div class="tasks">
+			<span v-show="!list.length">还没有添加任何任务</span>
+			<ul class="todo-list">
+				<li class="todo" :class="{comp:item.isChecked, editing: item ===edtorTodos }" v-for="item in filteredList">
+					<div class="view">
+						<input class="toggle" type="checkbox" v-model="item.isChecked">
+						<label @dblclick="edtorTodo(item)">{{item.title}}</label>
+						<button class="destroy" @click="delTodo(item)">删除</button>
+					</div>
+					<input class="edit" 
+					type="text" 
+					v-focus="item ===edtorTodos" 
+					v-model="item.title"
+					@blur="edtoredTodo(item)"
+					@keyup.13="edtoredTodo(item)"
+					@keyup.esc="cancelTodo(item)"
+					/>
+				</li>
+			</ul>
+		</div>
+			
+	</div>
+	
+	<script>
+	// ==== input身上的选中或不选中，可以直接用v-model
+		var store = {
+			save: function(key,value) {
+				localStorage.setItem(key,JSON.stringify(value));
+			},
+			fetch: function(key) {
+				return JSON.parse(localStorage.getItem(key)) || [];
+			}
+		};
+		var filter = {
+			all: function(list) {
+				return list;
+			},
+			finished: function(list) {
+				return list.filter(function(item) {
+					return item.isChecked
+				})
+			},
+			unfinished: function(item) {
+				return list.filter(function(item) {
+					return !item.isChecked
+				})
+			}
+		}
+
+		var list = store.fetch('lsl');
+		//声明式渲染
+		var app = new Vue({
+			el: '.main',
+			data: {
+				list: list,
+				/*[
+					{
+						title: 'chif',
+						isChecked: false
+					},
+					{
+						title: '吃饭',
+						isChecked: true
+					}
+				]*/
+				todo: '',
+				edtorTodos: '',//记录正在编辑的数据
+				beforeTitle: '',//记录正在编辑的数据
+				visibility: 'all' //通过这个属性值得变化对数据进行筛选
+			},
+			watch: {
+				//list数组增加删除可以监控到，但是不能监控每个值里面的变化，需要深度监控
+				/*list: function() {//监控list这个属性，当这个属性对应的值发生变化就会执行这个函数
+					store.save('lsl',this.list);
+				}*/
+				//深度监控
+				list: {
+					handler: function() {
+						store.save('lsl',this.list);
+					},
+					deep: true
+				}
+			},
+			computed: {
+				noCheckedLen: function() {
+					return this.list.filter(function(item) {
+						return !item.isChecked
+					}).length 
+				},
+				filteredList: function() {
+					//过滤的时候有三种情况 all finished unfinished
+					
+					//找到了过滤函数就返回过滤后的数据，如果没有就返回所有的数据
+					return filter[this.visibility] ? filter[this.visibility](list) : list;
+				}
+			},
+			methods: {
+				//<input type="text" class="task-input" placeholder="回车添加任务" v-model="todo" v-on:keyup.13="addTodo">
+				//v-on:keyup.13="addTodo(123,$event)"如果要传参数，可以加括号传递，$event表示事件对象
+				addTodo: function(data,ev) {
+					//console.log(data,ev)
+					this.list.push({
+						title: this.todo,
+						isChecked: false
+					})
+					this.todo = '';
+				},
+				delTodo: function(todo) {
+					var index = this.list.indexOf(todo);
+					this.list.splice(index,1);
+				},
+				edtorTodo: function(todo) {
+					//编辑这条任务的时候，记录一下编辑这条任务的title,方便在取消编辑的时候重新给之前的值
+					this.beforeTitle = todo.title;
+					this.edtorTodos = todo;
+				},
+				edtoredTodo: function(todo) {
+					this.edtorTodos = '';
+				},
+				cancelTodo: function(todo) {
+					todo.title = this.beforeTitle;
+					this.beforeTitle = '';
+					//让div显示出来，input隐藏
+					this.edtorTodos = '';
+				}
+			},
+			directives: {//自定义指令
+				"focus": {
+					//参数一：指令绑定的元素，binding指令的一些内容
+					update: function(el,binding) {
+						//console.log(el,binding)
+						if(binding.value) {
+							el.focus();
+						}
+					}
+				}
+			}
+		})
+		
+		function watchHashChange() {
+			var hash = window.location.hash.slice(1);
+			app.visibility = hash;
+		}
+		window.addEventListener('hashchange',watchHashChange);
+	</script>
+</body>
+</html>
