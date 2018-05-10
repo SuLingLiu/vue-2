@@ -43,6 +43,7 @@ let vm = new Vue({
 			}else {
 				item.checked = !item.checked;// 有了之后 点击是false
 			}
+			console.log(this.productList)
 			this.productList.forEach((item, index) => {
 				if(!item.checked) {
 					this.checkAllFlag = false;
