@@ -66,6 +66,7 @@ let vm = new Vue({
 		},
 		delProduct () {
 			// this.delProduct.$delete(this.curProduct); vue1.0的版本 现在不支持了
+			//删除数组中的某一项
 			var index = this.productList.indexOf(this.curProduct);
 			this.productList.splice(index,1);
 			this.delFlag = false;
