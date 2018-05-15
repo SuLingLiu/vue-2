@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app-7">
+        <ol>
+            <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id">
+                {{title}}
+                <!-- 作用域在父组件 -->
+            </todo-item>
+        </ol>
+    </div>
+
+    <script>
+        //注册全局的组件
+        Vue.component('todo-item', {
+            props: ['todo'],
+            template: '<li >{{ todo.text }} <slot></slot ></li>'
+        })
+
+        var app7 = new Vue({
+            el: '#app-7',
+            data: {
+                title: '作用域插槽',
+                groceryList: [
+                    { id: 0, text: '蔬菜' },
+                    { id: 1, text: '奶酪' },
+                    { id: 2, text: '随便其它什么人吃的东西' }
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{a}}</p>
+    </div>
+    <script>
+        var data = { a: 1 }
+        var vm = new Vue({
+            el: '#app',
+            data: data
+        })
+        console.log(vm.a == data.a);//true
+
+        // 以下两种设置属性都会会影响到原始数据，当这些数据改变时，视图会进行重渲染
+        /* vm.a = 2;
+        data.a = 3 */
+
+        //如果数据中没有的属性后加上也是不会重新渲染的，要用的可以提前定义出来，给默认值。具体的看vue文档数据与方法
+
+    </script>
+</body>
+
+</html>

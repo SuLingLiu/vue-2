@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app-7">
+
+        <todo-list v-bind:todos="todos">
+            <!-- 将 `slotProps` 定义为插槽作用域的名字 -->
+            <template slot-scope="slotProps">
+                <!-- 为待办项自定义一个模板，-->
+                <!-- 通过 `slotProps` 定制每个待办项。-->
+                <span v-if="slotProps.todo.isComplete">✓</span>
+                {{ slotProps.todo.text }}
+            </template>
+        </todo-list>
+    </div>
+
+    <script>
+        //注册全局的组件
+        Vue.component('todo-list', {
+            props: ['todos'],
+            template: `<ul>
+                        < li v-for="todo in todos" v-bind:key="todo.id">
+                            <slot v-bind:todo="todo">
+                                {{ todo.text }}
+                            </slot>
+                        </li >
+                      </ul > `
+        })
+
+        var app7 = new Vue({
+            el: '#app-7',
+            data: {
+                title: '作用域插槽',
+                todos: [
+                    { id: 0, text: '蔬菜' },
+                    { id: 1, text: '奶酪' },
+                    { id: 2, text: '随便其它什么人吃的东西' }
+                ],
+                todo: {}
+            }
+        })
+    </script>
+</body>
+
+</html>

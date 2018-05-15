@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app-7">
+        <ol>
+            <!--
+            todo-item组件引用标签，todo 对象是变量，通过绑定属性传递给子组件，
+          -->
+            <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id" v-on:receive="fnReceive">
+            </todo-item>
+        </ol>
+    </div>
+
+    <script>
+        //注册全局的组件
+        Vue.component('todo-item', {
+            props: ['todo'],//通过自定义的属性，父组件给子组件传递信息，子组件需要现在props上定义这个值用于接受
+            template: '<li v-on:click="fnPass(todo)">{{ todo.text }}</li>',
+            methods: {
+                fnPass: function (todo) {
+                    //通过this.$emit给父组件传递信息，注意如果自定义事件名有大写，会被识别成小写，如果你在这里还是写成大写是监听不到了，所以推荐你始终使用 kebab-case 的事件名
+                    this.$emit('receive', todo.id)
+                }
+            }
+        })
+
+        var app7 = new Vue({
+            el: '#app-7',
+            data: {
+                groceryList: [
+                    { id: 0, text: '蔬菜' },
+                    { id: 1, text: '奶酪' },
+                    { id: 2, text: '随便其它什么人吃的东西' }
+                ]
+            },
+            methods: {
+                fnReceive: function (id) {
+                    alert(id)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
